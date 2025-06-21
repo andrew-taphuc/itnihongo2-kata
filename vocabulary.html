@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xem Từ Vựng - Học Tiếng Nhật</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container vocabulary-container">
+        <header class="header">
+            <button class="back-btn" onclick="goBack()">← Quay lại</button>
+            <h1 class="title">📚 Xem Từ Vựng</h1>
+            <p class="subtitle">Tất cả từ vựng và phiên âm katakana</p>
+        </header>
+
+        <main class="vocabulary-area">
+            <!-- Bộ lọc và tìm kiếm -->
+            <div class="filter-section">
+                <div class="filter-controls">
+                    <div class="search-group">
+                        <input type="text" id="search-input" placeholder="Tìm kiếm từ vựng..." onkeyup="filterVocabulary()">
+                        <button class="search-btn" onclick="filterVocabulary()">🔍</button>
+                    </div>
+                    
+                    <div class="lesson-filter">
+                        <label for="lesson-select">Lọc theo bài:</label>
+                        <select id="lesson-select" onchange="filterVocabulary()">
+                            <option value="">Tất cả bài học</option>
+                        </select>
+                    </div>
+                    
+                    <div class="sort-options">
+                        <label for="sort-select">Sắp xếp:</label>
+                        <select id="sort-select" onchange="sortVocabulary()">
+                            <option value="lesson">Theo bài học</option>
+                            <option value="definition">Theo định nghĩa</option>
+                            <option value="katakana">Theo katakana</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="stats-bar">
+                    <span id="vocab-count">0</span> từ vựng
+                    <span class="separator">•</span>
+                    <span id="lesson-count">0</span> bài học
+                    <span class="separator">•</span>
+                    <span id="filtered-count">0</span> từ hiển thị
+                </div>
+            </div>
+
+            <!-- Bảng từ vựng -->
+            <div class="table-container">
+                <table class="vocabulary-table" id="vocabulary-table">
+                    <thead>
+                        <tr>
+                            <th class="lesson-col">Bài</th>
+                            <th class="definition-col">Định nghĩa (Tiếng Anh)</th>
+                            <th class="katakana-col">Katakana</th>
+                            <th class="actions-col">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="vocabulary-tbody">
+                        <tr>
+                            <td colspan="4" class="loading">Đang tải...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Phân trang -->
+            <div class="pagination" id="pagination">
+                <!-- Sẽ được tạo bởi JavaScript -->
+            </div>
+        </main>
+
+        <!-- Modal chi tiết từ vựng -->
+        <div id="detail-modal" class="modal">
+            <div class="modal-content detail-content">
+                <span class="close" onclick="closeDetailModal()">&times;</span>
+                <h2 id="detail-title">Chi tiết từ vựng</h2>
+                <div class="detail-info">
+                    <div class="detail-item">
+                        <label>Bài học:</label>
+                        <span id="detail-lesson">-</span>
+                    </div>
+                    <div class="detail-item">
+                        <label>Định nghĩa:</label>
+                        <span id="detail-definition">-</span>
+                    </div>
+                    <div class="detail-item">
+                        <label>Katakana:</label>
+                        <span id="detail-katakana" class="japanese-text">-</span>
+                    </div>
+                    <div class="detail-item">
+                        <label>Cách đọc:</label>
+                        <span id="detail-reading">-</span>
+                    </div>
+                </div>
+                <div class="detail-actions">
+                    <button onclick="copyKatakana()" class="modal-btn">📋 Sao chép Katakana</button>
+                    <button onclick="testWord()" class="modal-btn primary">🎯 Kiểm tra từ này</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="vocabulary.js"></script>
+</body>
+</html> 

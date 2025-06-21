@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kata Game Nâng Cao - Học Tiếng Nhật</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container advanced-kata-container">
+        <header class="header">
+            <button class="back-btn" onclick="goBack()">← Quay lại</button>
+            <h1 class="title">🎯 Kata Game Nâng Cao</h1>
+            <p class="subtitle">Tùy chỉnh cách học từ vựng của bạn</p>
+        </header>
+
+        <main class="setup-area">
+            <!-- Chọn bài học -->
+            <div class="setup-section">
+                <h3>📚 Chọn Bài Học</h3>
+                <div class="lesson-selection">
+                    <div class="lesson-option">
+                        <input type="checkbox" id="all-lessons" onchange="toggleAllLessons()">
+                        <label for="all-lessons"><strong>Tất cả bài học</strong></label>
+                    </div>
+                    <div class="lessons-grid" id="lessons-grid">
+                        <!-- Sẽ được tạo động từ JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tùy chọn câu hỏi -->
+            <div class="setup-section">
+                <h3>⚙️ Tùy Chọn Câu Hỏi</h3>
+                <div class="options-grid">
+                    <div class="option-group">
+                        <label>Thứ tự câu hỏi:</label>
+                        <div class="radio-group">
+                            <input type="radio" id="random-order" name="order" value="random" checked>
+                            <label for="random-order">Ngẫu nhiên</label>
+                            <input type="radio" id="sequential-order" name="order" value="sequential">
+                            <label for="sequential-order">Lần lượt</label>
+                        </div>
+                    </div>
+
+                    <div class="option-group">
+                        <label>Số lượng câu hỏi:</label>
+                        <div class="radio-group">
+                            <input type="radio" id="all-words" name="limit" value="all" checked>
+                            <label for="all-words">Tất cả từ</label>
+                            <input type="radio" id="limited-words" name="limit" value="limited">
+                            <label for="limited-words">Giới hạn số từ</label>
+                        </div>
+                        <div class="limit-input" id="limit-input" style="display: none;">
+                            <input type="number" id="word-limit" min="1" max="100" value="10" placeholder="Nhập số từ...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thống kê -->
+            <div class="setup-section">
+                <h3>📊 Thống Kê</h3>
+                <div class="stats-display" id="stats-display">
+                    <div class="stat-item">
+                        <span class="stat-label">Tổng từ vựng:</span>
+                        <span class="stat-value" id="total-words">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Từ đã chọn:</span>
+                        <span class="stat-value" id="selected-words">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Bài học đã chọn:</span>
+                        <span class="stat-value" id="selected-lessons">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nút bắt đầu -->
+            <div class="start-section">
+                <button id="start-game-btn" class="start-btn" onclick="startAdvancedGame()">
+                    🚀 Bắt Đầu Game
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script src="advanced-kata.js"></script>
+</body>
+</html> 

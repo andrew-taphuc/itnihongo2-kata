@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kata Game Nâng Cao - Game</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container kata-container">
+        <header class="header">
+            <button class="back-btn" onclick="goBackToSetup()">← Cài đặt</button>
+            <h1 class="title">🎯 Kata Game Nâng Cao</h1>
+            <div class="game-info">
+                <div class="lessons-info" id="lessons-info">Bài: -</div>
+                <div class="score-display">
+                    <span id="score">0</span>/<span id="total">0</span>
+                    <div class="accuracy" id="accuracy">0%</div>
+                </div>
+            </div>
+        </header>
+
+        <main class="game-area">
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">
+                        Câu <span id="current-question">1</span>/<span id="total-questions">10</span>
+                    </div>
+                    <div class="lesson-badge" id="lesson-badge">Bài -</div>
+                </div>
+                <div class="definition" id="definition">
+                    Đang tải...
+                </div>
+            </div>
+
+            <div class="input-section">
+                <label for="japanese-input">Nhập từ tiếng Nhật (Katakana):</label>
+                <div class="input-group">
+                    <input 
+                        type="text" 
+                        id="japanese-input" 
+                        placeholder="Nhập câu trả lời của bạn..."
+                        autocomplete="off"
+                        autofocus
+                    >
+                    <button id="submit-btn" onclick="checkAnswer()">Kiểm tra</button>
+                </div>
+                <div class="input-tip">
+                    💡 Mẹo: Bật IME tiếng Nhật hoặc copy-paste từ nguồn khác
+                </div>
+            </div>
+
+            <div class="feedback-section" id="feedback-section" style="display: none;">
+                <div class="feedback" id="feedback"></div>
+                <button id="next-btn" onclick="nextQuestion()">Câu tiếp theo →</button>
+            </div>
+
+            <div class="controls">
+                <button class="control-btn" onclick="clearInput()">Xóa</button>
+                <button class="control-btn" onclick="skipQuestion()">Bỏ qua</button>
+                <button class="control-btn" onclick="showHint()">Gợi ý</button>
+            </div>
+        </main>
+
+        <footer class="game-footer">
+            <div class="instructions">
+                <p><strong>Hướng dẫn:</strong> Nhập từ tiếng Nhật tương ứng với định nghĩa • Nhấn Enter để kiểm tra</p>
+            </div>
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal kết quả -->
+    <div id="result-modal" class="modal">
+        <div class="modal-content result-content">
+            <h2>🎉 Kết quả</h2>
+            <div class="result-stats">
+                <div class="stat">
+                    <span class="stat-number" id="final-score">0</span>
+                    <span class="stat-label">Câu đúng</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="final-total">0</span>
+                    <span class="stat-label">Tổng câu</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="final-accuracy">0%</span>
+                    <span class="stat-label">Độ chính xác</span>
+                </div>
+            </div>
+            <div class="lesson-summary" id="lesson-summary">
+                <!-- Sẽ hiển thị thống kê theo bài -->
+            </div>
+            <div class="result-actions">
+                <button onclick="restartAdvancedGame()" class="modal-btn primary">Chơi lại</button>
+                <button onclick="goBackToSetup()" class="modal-btn">Thay đổi cài đặt</button>
+                <button onclick="goHome()" class="modal-btn">Về menu chính</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="advanced-kata-game.js"></script>
+</body>
+</html> 

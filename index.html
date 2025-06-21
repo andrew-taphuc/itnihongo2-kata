@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Học Tiếng Nhật - Menu Chính</title>
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">🎌 IT Nihongo 2 🎌</h1>
+            <p class="subtitle">Chọn một tùy chọn để bắt đầu học</p>
+        </header>
+
+        <main class="main-menu">
+            <div class="menu-grid">
+                <button class="menu-btn active" id="kata-btn" onclick="goToKata()">
+                    <div class="btn-icon">📝</div>
+                    <h3>Quick start</h3>
+                    <p>Kiểm tra nhanh cách viết katakana</p>
+                </button>
+
+                <button class="menu-btn active" onclick="goToAdvancedKata()">
+                    <div class="btn-icon">🎯</div>
+                    <h3>Ôn tập katakana</h3>
+                    <p>Tùy chỉnh bài học và cách thức học</p>
+                </button>
+
+                <button class="menu-btn active" onclick="goToVocabulary()">
+                    <div class="btn-icon">📚</div>
+                    <h3>Xem Từ Vựng</h3>
+                    <p>Xem tất cả từ vựng theo bảng</p>
+                </button>
+
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p></p>
+        </footer>
+    </div>
+
+    <!-- Modal Coming Soon -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>🚧 Tính năng đang phát triển</h2>
+            <p id="modal-text">Tính năng này sẽ được phát triển trong tương lai!</p>
+            <button onclick="closeModal()" class="modal-btn">Đóng</button>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html> 

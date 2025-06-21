@@ -1,0 +1,117 @@
+lesson,definition,katakana
+3,Security,セキュリティ
+3,Website,ウェブサイト
+3,Login,ログイン
+3,Internet Shopping,インターネットショッピング／ネットショッピング
+3,Credit card,クレジットカード
+3,Access,アクセス
+3,Digital,ディジタル／デジタル
+3,Back up,バックアップ
+3,Bug,バグ
+3,Timestamp,タイムスタンプ
+3,Original,オリジナル
+4,Computer virus,コンピュータウイルス
+4,Phishing,フィッシング
+4,Cache poisoning,キャッシュポイズニング
+4,Malware,マルウェア
+4,Injection,インジェクション
+4,Directory traversal,ディレクトリトラバーサル
+4,Spyware,スパイウェア
+4,Web beacon,ウェブビーコン
+4,Keylogger,キーロガー
+4,Keyboard,キーボード
+4,Social engineering,ソーシャルエンジニアリング
+4,URL,ユーアールエル
+4,DNS,ディーエヌエス
+4,SQL,エスキューエル
+4,SEO,エスイーオー
+4,DoS,ドス
+5,Risk assessment,リスクアセスメント
+5,Process,プロセス
+5,Risk level,リスクレベル
+5,Risk financing,リスクファイナンシング
+5,Risk control,リスクコントロール
+5,Management system,マネジメントシステム
+5,Security By Design,セキュリティバイデザイン
+5,ISMS,アイエスエムエス
+6,Computer virus,コンピュータウイルス
+6,Program,プログラム
+6,Database,データベース
+6,Malware,マルウェア
+6,Macro,マクロ
+6,Word processing software,ワープロソフト
+6,Troy,トロイ
+6,Worm,ワーム
+6,Drive-by Download,ドライブバイダウンロード
+7,OS,オーエス
+7,C&C,シーアンドシー
+7,Patch,パッチ
+7,Install,インストール
+7,Signature code,シグネチャコード
+7,Pattern matching,パターンマッチング
+7,Assemble,アセンブル
+7,Binary code,バイナリコード
+7,Source code,ソースコード
+7,Behavior,ビヘイビア
+7,Botnet,ボットネット
+8,DES,ディーエス
+8,AES,アイエス
+8,RSA,アールエスエー
+9,Hash,ハッシュ
+9,Digital data,ディジタル／デジタル・データ
+9,Message digest,メッセージダイジェスト
+9,Device,デバイス
+9,Multipurpose,マルチパーパス
+9,Extensions,エクステンションズ
+9,IPsec,アイピーセック
+9,SHA-2,エスエイチエーツー／シャーツー
+9,CA,シーエー
+9,SSL,エスエスエル
+9,AH,エーエイチ
+9,ESP,イーエスピー
+9,S/MIME,エスマイム
+10,Security,セキュリティ
+10,Password,パスワード
+10,Hash,ハッシュ
+10,CAPTCHA,キャプチャ
+10,Biometrics,バイオメトリクス
+10,Content,コンテンツ
+10,Pattern,パターン
+10,Device,デバイス
+11,Firewall,ファイアウォール
+11,Packet filtering,パケット・フィルタリング
+11,Proxy,プロキシ
+11,Penetration test,ペネトレーション・テスト
+11,Security hole,セキュリティ・ホール
+11,Back door,バック・ドア
+11,Format,フォーマット
+11,Remote,リモート
+11,Authentication,オーセンティケーション
+11,Rootkit,ルートキット
+11,WPA3,ダブリューピーエースリー
+11,DeMilitarized Zone,デミリタライズド・ゾーン
+11,DMZ,ディーエムゼット
+11,Web Application Firewall,ウェブ・アプリケーション・ファイアウォール
+11,WAF,ワフ
+11,Intrusion Detection System,イントルーション・ディテクション・システム
+11,IDS,アイディーエス
+12,Artificial Intelligence,アーティフィシャル・インテリジェンス
+12,Dartmouth,ダートマス
+12,Character,キャラクター
+12,Singularity,シンギュラリティ
+12,Othello,オセロ
+13,Consent,コンセント
+13,Marketing,マーケティング
+13,Engine,エンジン
+13,Deep learning,ディープラーニング
+13,Neuro-fuzzy,ニューロファジィ
+13,Puzzle,パズル
+14,Parameter,パラメータ
+14,Big data,ビッグデータ
+14,Process,プロセス
+14,Model,モデル
+14,Label,ラベル
+15,Group,グループ
+15,Plot,プロット
+15,Chain,チェーン
+15,Random,ランダム
