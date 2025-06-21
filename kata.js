@@ -9,6 +9,7 @@ class KataGame {
     this.questionCount = 0;
     this.maxQuestions = 10; // Giới hạn số câu hỏi
     this.usedWords = new Set();
+    this.hasAnsweredIncorrectly = false; // Theo dõi nếu đã trả lời sai
 
     // DOM elements
     this.definitionEl = document.getElementById("definition");
@@ -230,6 +231,7 @@ class KataGame {
     this.currentWord = this.getRandomWord();
     this.usedWords.add(this.currentWord.id);
     this.questionCount++;
+    this.hasAnsweredIncorrectly = false; // Reset trạng thái cho câu mới
 
     // Cập nhật UI
     this.definitionEl.textContent = this.currentWord.definition;
@@ -261,17 +263,40 @@ class KataGame {
       return;
     }
 
-    this.totalQuestions++;
-    const isCorrect = userAnswer === correctAnswer;
+    const isCorrect = this.compareAnswers(userAnswer, correctAnswer);
 
-    if (isCorrect) {
-      this.score++;
-      this.showFeedback(true, `Chính xác! 正解！ (${this.currentWord.romaji})`);
+    if (!this.hasAnsweredIncorrectly) {
+      // Lần đầu trả lời
+      this.totalQuestions++;
+
+      if (isCorrect) {
+        this.score++;
+        this.showFeedback(
+          true,
+          `Chính xác! 正解！ (${this.currentWord.romaji})`
+        );
+      } else {
+        this.hasAnsweredIncorrectly = true;
+        this.showFeedback(
+          false,
+          `Sai rồi! 間違い！<br>Đáp án đúng: <strong>${correctAnswer}</strong><br>Romaji: ${this.currentWord.romaji}<br><br>💡 <em>Hãy nhập lại đáp án đúng để tiếp tục</em>`
+        );
+        // Xóa input để người dùng nhập lại
+        this.inputEl.value = "";
+        this.inputEl.focus();
+        this.updateUI();
+        return;
+      }
     } else {
-      this.showFeedback(
-        false,
-        `Sai rồi! 間違い！<br>Đáp án đúng: <strong>${correctAnswer}</strong><br>Romaji: ${this.currentWord.romaji}`
-      );
+      // Đã trả lời sai trước đó, kiểm tra xem nhập đúng chưa
+      if (isCorrect) {
+        this.showFeedback(true, `Chính xác! Bây giờ có thể tiếp tục!`);
+      } else {
+        this.showMessage("Vui lòng nhập đúng đáp án để tiếp tục!", "warning");
+        this.inputEl.value = "";
+        this.inputEl.focus();
+        return;
+      }
     }
 
     // Disable input
@@ -286,6 +311,31 @@ class KataGame {
         isCorrect ? "Đúng" : "Sai"
       }`
     );
+  }
+
+  compareAnswers(userAnswer, correctAnswer) {
+    // Chuẩn hóa chuỗi để so sánh
+    const normalize = (str) =>
+      str
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, "")
+        .replace(/[・・]/g, "")
+        .replace(/[ー－]/g, "");
+
+    const normalizedUser = normalize(userAnswer);
+    const normalizedCorrect = normalize(correctAnswer);
+
+    // So sánh chính xác
+    if (normalizedUser === normalizedCorrect) {
+      return true;
+    }
+
+    // Kiểm tra nếu có nhiều đáp án (phân tách bằng /, ／)
+    const alternatives = correctAnswer
+      .split(/[\/／]/)
+      .map((alt) => normalize(alt.trim()));
+    return alternatives.some((alt) => alt === normalizedUser);
   }
 
   showFeedback(isCorrect, message) {

@@ -11,6 +11,7 @@ class AdvancedKataGame {
     this.answeredQuestions = 0;
     this.results = [];
     this.lessonStats = new Map();
+    this.hasAnsweredIncorrectly = false; // Theo dõi nếu đã trả lời sai
 
     // DOM elements
     this.definitionEl = document.getElementById("definition");
@@ -113,12 +114,11 @@ class AdvancedKataGame {
     }
 
     this.currentWord = this.words[this.currentWordIndex];
-    this.answeredQuestions++;
+    this.hasAnsweredIncorrectly = false; // Reset trạng thái cho câu mới
 
     // Cập nhật UI
     this.definitionEl.textContent = this.currentWord.definition;
     this.lessonBadgeEl.textContent = `Bài ${this.currentWord.lesson}`;
-    this.currentQuestionEl.textContent = this.answeredQuestions;
 
     // Reset input và feedback
     this.inputEl.value = "";
@@ -140,34 +140,63 @@ class AdvancedKataGame {
     const correctAnswer = this.currentWord.katakana;
     const isCorrect = this.compareAnswers(userAnswer, correctAnswer);
 
-    // Cập nhật điểm số
-    const lesson = this.currentWord.lesson;
-    const lessonStat = this.lessonStats.get(lesson);
-    lessonStat.total++;
+    if (!this.hasAnsweredIncorrectly) {
+      // Lần đầu trả lời
+      this.answeredQuestions++;
+      this.currentQuestionEl.textContent = this.answeredQuestions;
 
-    if (isCorrect) {
-      this.score++;
-      lessonStat.correct++;
-    }
+      const lesson = this.currentWord.lesson;
+      const lessonStat = this.lessonStats.get(lesson);
+      lessonStat.total++;
 
-    // Lưu kết quả
-    this.results.push({
-      question: this.currentWord.definition,
-      correctAnswer: correctAnswer,
-      userAnswer: userAnswer,
-      isCorrect: isCorrect,
-      lesson: lesson,
-    });
+      if (isCorrect) {
+        this.score++;
+        lessonStat.correct++;
 
-    // Hiển thị feedback
-    if (isCorrect) {
-      this.showFeedback(true, `Chính xác! 正解！`);
+        // Lưu kết quả
+        this.results.push({
+          question: this.currentWord.definition,
+          correctAnswer: correctAnswer,
+          userAnswer: userAnswer,
+          isCorrect: isCorrect,
+          lesson: lesson,
+        });
+
+        this.showFeedback(true, `Chính xác! 正解！`);
+      } else {
+        this.hasAnsweredIncorrectly = true;
+
+        // Lưu kết quả (sai)
+        this.results.push({
+          question: this.currentWord.definition,
+          correctAnswer: correctAnswer,
+          userAnswer: userAnswer,
+          isCorrect: false,
+          lesson: lesson,
+        });
+
+        this.showFeedback(
+          false,
+          `Sai rồi! 間違い！<br>Đáp án đúng: <strong>${correctAnswer}</strong><br><br>💡 <em>Hãy nhập lại đáp án đúng để tiếp tục</em>`
+        );
+        // Xóa input để người dùng nhập lại
+        this.inputEl.value = "";
+        this.inputEl.focus();
+        this.updateUI();
+        return;
+      }
     } else {
-      this.showFeedback(
-        false,
-        `Sai rồi! 間違い！<br>Đáp án đúng: <strong>${correctAnswer}</strong>`
-      );
+      // Đã trả lời sai trước đó, kiểm tra xem nhập đúng chưa
+      if (isCorrect) {
+        this.showFeedback(true, `Chính xác! Bây giờ có thể tiếp tục!`);
+      } else {
+        this.showMessage("Vui lòng nhập đúng đáp án để tiếp tục!", "warning");
+        this.inputEl.value = "";
+        this.inputEl.focus();
+        return;
+      }
     }
+
     this.currentWordIndex++;
     this.updateUI();
   }
@@ -236,16 +265,19 @@ class AdvancedKataGame {
   }
 
   updateProgress() {
-    const progress = ((this.answeredQuestions - 1) / this.totalQuestions) * 100;
+    const progress = (this.answeredQuestions / this.totalQuestions) * 100;
     this.progressEl.style.width = progress + "%";
   }
 
   showFinalResult() {
-    const accuracy = Math.round((this.score / this.totalQuestions) * 100);
+    const accuracy =
+      this.answeredQuestions > 0
+        ? Math.round((this.score / this.answeredQuestions) * 100)
+        : 0;
 
     // Cập nhật modal kết quả
     document.getElementById("final-score").textContent = this.score;
-    document.getElementById("final-total").textContent = this.totalQuestions;
+    document.getElementById("final-total").textContent = this.answeredQuestions;
     document.getElementById("final-accuracy").textContent = accuracy + "%";
 
     // Hiển thị thống kê theo bài
@@ -282,7 +314,7 @@ class AdvancedKataGame {
     const result = {
       timestamp: new Date().toISOString(),
       score: this.score,
-      total: this.totalQuestions,
+      total: this.answeredQuestions,
       accuracy: accuracy,
       settings: this.settings,
       lessonStats: Object.fromEntries(this.lessonStats),
